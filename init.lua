@@ -2,7 +2,7 @@
 
 require('plugins')
 
-require('colors')
+require('estetica')
 
 require('options')
 

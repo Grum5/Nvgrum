@@ -28,3 +28,13 @@ vim.opt.clipboard = "unnamedplus"  -- Usar el portapapeles del sistema
 vim.opt.splitright = true
 -- Configurar la apertura de ventanas horizontales en la parte inferior
 vim.opt.splitbelow = true
+
+-- Configuración básica para netrw en Lua
+vim.g.netrw_banner = 0            -- Deshabilita el banner inicial
+vim.g.netrw_liststyle = 3         -- Usa el modo de árbol
+vim.g.netrw_browse_split = 0      -- Abre en una nueva ventana
+vim.g.netrw_altv = 1              -- Abre en ventanas verticales
+vim.g.netrw_winsize = 75          -- Tamaño de la ventana
+
+-- Deshabilitar el uso del raton
+vim.opt.mouse = "" 

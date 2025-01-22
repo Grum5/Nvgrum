@@ -1,3 +1,10 @@
+-- Habilitar tecla leader
+vim.g.mapleader = " "
+
+-- Cambio de buffer
+vim.api.nvim_set_keymap('n', '<Leader><', ':bnext<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>>', ':bprev<CR>', { noremap = true, silent = true})
+
 -- Deshabilitar teclas de flecha en modo normal
 vim.api.nvim_set_keymap('n', '<Up>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Down>', '', { noremap = true, silent = true })
@@ -15,3 +22,5 @@ vim.api.nvim_set_keymap('v', '<Up>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Down>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Left>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Right>', '', { noremap = true, silent = true })
+
+
