@@ -15,14 +15,8 @@ vim.opt.laststatus = 2            -- Siempre mostrar la barra de estado.
 vim.opt.ignorecase = true         -- Ignorar mayúsculas/minúsculas en búsquedas
 vim.opt.smartcase = true          -- Activar búsqueda sensible a mayúsculas
 
--- Sobrescribir colores del cursor
-vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff0000", fg = "#ffffff" }) -- Rojo brillante
-vim.api.nvim_set_hl(0, "lCursor", { bg = "#ff4500", fg = "#ffffff" }) -- Naranja
-
--- Habilitar resaltado de la línea actual
-vim.opt.cursorline = true
 -- Otros ajustes específicos de Neovim
-vim.opt.clipboard = "unnamedplus"  -- Usar el portapapeles del sistema
+-- vim.opt.clipboard = "unnamedplus"  -- Usar el portapapeles del sistema
 
 -- Configurar la apertura de ventanas verticales en el lado derecho
 vim.opt.splitright = true
@@ -37,4 +31,4 @@ vim.g.netrw_altv = 1              -- Abre en ventanas verticales
 vim.g.netrw_winsize = 75          -- Tamaño de la ventana
 
 -- Deshabilitar el uso del raton
-vim.opt.mouse = "" 
+vim.opt.mouse = ""
