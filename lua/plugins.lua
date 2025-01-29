@@ -6,12 +6,12 @@ vim.call('plug#begin')
 -- Theme Gruvbox
 Plug 'morhetz/gruvbox'
 
--- LSP Plugin
-Plug 'neovim/nvim-lspconfig'
-
 -- Mason Plugin, para el manejo de los servidores lsp
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+
+-- LSP Plugin
+Plug 'neovim/nvim-lspconfig'
 
 -- Nvim-cmp y fuentes
 Plug 'hrsh7th/nvim-cmp'                  -- " Framework de autocompletado
@@ -32,6 +32,10 @@ Plug 'akinsho/bufferline.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
-vim.call('plug#end')
+-- Nvim Treesiter plugin
+vim.cmd[[
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+]]
 
+vim.call('plug#end')
 
