@@ -9,10 +9,11 @@ cmp.setup({
         end,
     },
     mapping = {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Confirmar selección
+        ['<C-e>'] = cmp.mapping.close(), -- Cierra la ventana de autocompletado
+        -- ['<C-d>'] = cmp.mapping.scroll_docs(-4), -- Tabula -4 cuando se usa el cmap
+        -- ['<C-f>'] = cmp.mapping.scroll_docs(4),  -- Tabula 4 cuando se usa el cmap
+        -- ['<C-Space>'] = cmp.mapping.complete(),  --
+        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Confirmar selección
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
