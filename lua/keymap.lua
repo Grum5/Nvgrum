@@ -23,4 +23,6 @@ vim.api.nvim_set_keymap('v', '<Down>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Left>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<Right>', '', { noremap = true, silent = true })
 
+-- Abrir el modo Explore
+vim.api.nvim_set_keymap('n', '<Leader><Esc>', ':Explore<CR>', { noremap = true, silent = true })
 
