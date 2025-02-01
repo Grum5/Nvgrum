@@ -24,7 +24,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Configuración básica para netrw en Lua
-vim.g.netrw_banner = 0            -- Deshabilita el banner inicial
+-- vim.g.netrw_banner = 0            -- Deshabilita el banner inicial
 vim.g.netrw_liststyle = 3         -- Usa el modo de árbol
 vim.g.netrw_browse_split = 0      -- Abre en una nueva ventana
 vim.g.netrw_altv = 1              -- Abre en ventanas verticales
