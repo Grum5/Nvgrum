@@ -8,6 +8,8 @@ local languages = {
     'astro',
     'kotlin',
     'c_sharp',
+    'markdown',
+    'markdown_inline',
 }
 
 require("nvim-treesitter.configs").setup({
