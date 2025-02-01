@@ -14,6 +14,7 @@ local servers = {
     'kotlin_language_server',   -- Kotlin LSP
     'gradle_ls',                -- Gradle LSP
     'omnisharp',                -- C# LSP
+    -- 'grammarly',                -- Markdown / Text LSP
 }
 
 -- ---------------------------------------------------
@@ -93,5 +94,7 @@ lspconfig.kotlin_language_server.setup({})  -- kotlin_language_server LSP setup 
 lspconfig.gradle_ls.setup({})               -- gradle_ls LSP setup | Gradle
 
 lspconfig.omnisharp.setup({})               -- omnisharp LSP setup | C#
+
+-- lspconfig.grammarly.setup({})               -- grammarly LSP setup | Markdown & Text
 
 

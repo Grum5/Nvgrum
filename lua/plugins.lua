@@ -37,5 +37,10 @@ vim.cmd[[
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 ]]
 
+-- Markdown plugin
+vim.cmd[[
+Plug 'MeanderingProgrammer/render-markdown.nvim', {'do': 'make'}
+]]
+
 vim.call('plug#end')
 

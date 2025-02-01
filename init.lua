@@ -17,3 +17,7 @@ require('lsp')
 
 -- Nvim treesitter config
 require('treesitter_config')
+
+-- Render markdown config
+require('markdown_config')
+
