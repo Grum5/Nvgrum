@@ -1,10 +1,6 @@
 -- Habilitar tecla leader
 vim.g.mapleader = " "
 
--- Cambio de buffer
-vim.api.nvim_set_keymap('n', '<Leader><', ':bnext<CR>', { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<Leader>>', ':bprev<CR>', { noremap = true, silent = true})
-
 -- Deshabilitar teclas de flecha en modo normal
 vim.api.nvim_set_keymap('n', '<Up>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Down>', '', { noremap = true, silent = true })
@@ -25,4 +21,8 @@ vim.api.nvim_set_keymap('v', '<Right>', '', { noremap = true, silent = true })
 
 -- Abrir el modo Explore
 vim.api.nvim_set_keymap('n', '<Leader><Esc>', ':Explore<CR>', { noremap = true, silent = true })
+
+-- Bufferline plugin hotkeys
+vim.api.nvim_set_keymap('n', '<Leader><', ':BufferLineCycleNext<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true})
 
