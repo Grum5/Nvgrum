@@ -42,5 +42,8 @@ vim.cmd[[
 Plug 'MeanderingProgrammer/render-markdown.nvim', {'do': 'make'}
 ]]
 
+-- Autocomplete parentheses plugin
+Plug 'tmsvg/pear-tree'
+
 vim.call('plug#end')
 
