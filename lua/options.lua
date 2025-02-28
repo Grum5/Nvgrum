@@ -28,4 +28,14 @@ vim.opt.splitbelow = true
 vim.g.netrw_liststyle = 3           -- Usa el modo de árbol
 
 -- Deshabilitar el uso del raton
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
+
+-- Configurar el cursor como bloque parpadeante
+vim.opt.guicursor = "n-v-c:block-Cursor-blinkon250,i:block-Cursor-blinkon250,r-cr:block-Cursor-blinkon250"
+
+-- Personalizar los colores del cursor para simular semi-transparencia
+vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff5555", fg = "#000000" }) -- Fondo semi-transparente (visual) y texto negro
+vim.api.nvim_set_hl(0, "lCursor", { bg = "#ff7777", fg = "#000000" }) -- Fondo más claro para local cursor
+
+-- Habilitar resaltado de la línea actual
+vim.opt.cursorline = true

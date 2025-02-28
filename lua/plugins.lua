@@ -6,6 +6,9 @@ vim.call('plug#begin')
 -- Theme Gruvbox
 Plug 'morhetz/gruvbox'
 
+-- Theme KANAGAWA
+Plug 'rebelot/kanagawa.nvim'
+
 -- Mason Plugin, para el manejo de los servidores lsp
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
