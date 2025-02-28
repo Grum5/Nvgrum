@@ -6,14 +6,15 @@ local lspconfig = require('lspconfig')
 
 -- Verificar que esten instalados los servidores
 local servers = {
-    'clangd',                 -- C++ LSP
-    'pylsp',                  -- Python LSP
-    'lua_ls',                 -- Lua LSP
+    -- 'clangd',                 -- No soportado en Raspberry Pi 5 Ubuntu server
+    'pylsp',                    -- Python LSP
+    'jinja_lsp',                 -- Jinja LSP
+    'lua_ls',                   -- Lua LSP
     'ts_ls',                  -- Javascript and Typescript LSP
-    'astro',                  -- Astro LSP
-    'kotlin_language_server', -- Kotlin LSP
+    -- 'astro',                  -- Astro LSP
+    -- 'kotlin_language_server', -- Kotlin LSP
     'gradle_ls',              -- Gradle LSP
-    'omnisharp',              -- C# LSP
+    -- 'omnisharp',              -- C# LSP
     'vale_ls'                 -- Markdown & Text LSP
 }
 

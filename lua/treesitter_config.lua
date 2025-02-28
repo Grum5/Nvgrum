@@ -2,6 +2,7 @@
 local languages = {
     'lua',
     'python',
+    'css',
     'cpp',
     'javascript',
     'typescript',
@@ -13,6 +14,9 @@ local languages = {
     'html',
     'java',
     'groovy',
+    'jinja',
+    'jinja_inline',
+    'sql',
 }
 
 require('nvim-treesitter.configs').setup {
