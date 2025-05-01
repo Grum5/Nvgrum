@@ -13,7 +13,6 @@ local languages = {
     'html',
     'java',
     'groovy',
-    'jinja',
     'rust',
 }
 
