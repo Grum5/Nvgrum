@@ -13,6 +13,8 @@ local languages = {
     'html',
     'java',
     'groovy',
+    'jinja',
+    'rust',
 }
 
 require('nvim-treesitter.configs').setup {
