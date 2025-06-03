@@ -39,3 +39,12 @@ vim.api.nvim_set_hl(0, "lCursor", { bg = "#ff7777", fg = "#000000" }) -- Fondo m
 
 -- Habilitar resaltado de la línea actual
 vim.opt.cursorline = true
+
+
+-- Que los archivos XAML se reconozcan como XML
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.xaml",
+  callback = function()
+    vim.bo.filetype = "xml"
+  end,
+})
