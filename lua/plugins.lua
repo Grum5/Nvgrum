@@ -37,7 +37,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 -- Nvim Treesiter plugin
 vim.cmd[[
-Plug 'nvim-treesitter/nvim-treesitter', {'branch': 'master', 'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 ]]
 
 -- Markdown plugin
