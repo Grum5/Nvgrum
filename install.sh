@@ -21,7 +21,6 @@ fi
 # shortcut: solo apt (Debian/Ubuntu/Raspberry Pi OS); agregar dnf/pacman si se usa otra distro
 sudo apt-get update
 sudo apt-get install -y git curl tar gzip unzip make gcc xclip
-sudo apt-get install -y tree-sitter-cli 2>/dev/null || echo "AVISO: tree-sitter-cli no disponible en apt (nvim-treesitter rama main lo necesita)"
 
 # 2. Neovim en la version exacta
 if nvim --version 2>/dev/null | head -1 | grep -qx "NVIM $NVIM_VERSION"; then

@@ -2,25 +2,25 @@
 -- Llamando las dependencias necesarias
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
-local lspconfig = require('lspconfig')
 
 -- Verificar que esten instalados los servidores
 local servers = {
     -- 'clangd',                 -- No soportado en Raspberry Pi 5 Ubuntu server
-    'pylsp',                    -- Python LSP
-    'jinja_lsp',                 -- Jinja LSP
+    -- 'pylsp',                    -- Python LSP
+    -- 'jinja_lsp',                -- Jinja LSP
     'lua_ls',                   -- Lua LSP
-    'ts_ls',                  -- Javascript and Typescript LSP
+    -- 'ts_ls',                    -- Javascript and Typescript LSP
     -- 'astro',                  -- Astro LSP
     -- 'kotlin_language_server', -- Kotlin LSP
-    'gradle_ls',              -- Gradle LSP
+    -- 'gradle_ls',                 -- Gradle LSP
     -- 'omnisharp',              -- C# LSP
-    'vale_ls'                 -- Markdown & Text LSP
+    -- 'vale_ls'                    -- Markdown & Text LSP
 }
 
 -- ---------------------------------------------------
--- Configuracion de la funcion para usar los hotkeys cuando se cargue un servidor LSP
-local on_attach = function(_, bufnr)
+-- Atajos que se activan cuando un servidor LSP se conecta al buffer
+vim.api.nvim_create_autocmd("LspAttach", { callback = function(args)
+    local bufnr = args.buf
     -- Helper para asignar atajos
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -48,48 +48,36 @@ local on_attach = function(_, bufnr)
 
     -- Formateo
     buf_set_keymap("n", "<leader>f", "<Cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts) -- Formatear el archivo actual
-end
+end })
 
 -- ---------------------------------------------------
 -- Mason setup
 mason.setup()
 
 -- ---------------------------------------------------
--- Mason-lspconfig setup
+-- Configuración específica para el LSP de Lua (API de Neovim 0.11)
+vim.lsp.config("lua_ls", {
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = vim.split(package.path, ";"),
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+                enable = false,
+            },
+        }
+    }
+})
+
+-- ---------------------------------------------------
+-- Mason-lspconfig v2: instala los servidores y los habilita con vim.lsp.enable
 mason_lspconfig.setup({
     ensure_installed = servers,
-    automatic_installation = true,
 })
-
-mason_lspconfig.setup_handlers({
-    -- Configura cada servidor con la función on_attach
-    function(server_name)
-        local opts = { on_attach = on_attach }
-
-        -- Configuración específica para el LSP de Lua
-        if server_name == "lua_ls" then
-            opts.settings = {
-                Lua = {
-                    runtime = {
-                        version = "LuaJIT",  -- O ajusta si estás usando una versión diferente
-                        path = vim.split(package.path, ";"),
-                    },
-                    diagnostics = {
-                        globals = { "vim" },  -- Esto es importante si ves el error "Undefined global `vim`"
-                    },
-                    workspace = {
-                        library = vim.api.nvim_get_runtime_file("", true),  -- Agrega bibliotecas de Neovim
-                    },
-                    telemetry = {
-                        enable = false,  -- Desactiva la telemetría si no la necesitas
-                    },
-                }
-            }
-        end
-
-        -- Configura el servidor con las opciones ajustadas
-        lspconfig[server_name].setup(opts)
-    end,
-})
-
-
