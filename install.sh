@@ -10,6 +10,7 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONF_DIR="$HOME/.config/nvim"
 PLUG_DIR="$HOME/.local/share/nvim/plugged"
 LOCK="$REPO_DIR/plugins.lock"
+SUDO=""; [[ $EUID -eq 0 ]] || SUDO=sudo  # en VPS como root no suele existir sudo
 
 if [[ "${1:-}" == "--lock" ]]; then
     for d in "$PLUG_DIR"/*/; do
@@ -20,8 +21,8 @@ fi
 
 # 1. Dependencias del sistema
 # shortcut: solo apt (Debian/Ubuntu/Raspberry Pi OS); agregar dnf/pacman si se usa otra distro
-sudo apt-get update
-sudo apt-get install -y git curl tar gzip unzip make gcc xclip
+$SUDO apt-get update
+$SUDO apt-get install -y ca-certificates git curl tar gzip unzip make gcc xclip
 
 case "$(uname -m)" in
     x86_64)        ARCH=x86_64; TS_ARCH=x64 ;;
@@ -34,8 +35,8 @@ if tree-sitter --version 2>/dev/null | grep -qx "tree-sitter $TS_VERSION"; then
     echo "tree-sitter $TS_VERSION ya instalado"
 else
     curl -fL "https://github.com/tree-sitter/tree-sitter/releases/download/v$TS_VERSION/tree-sitter-linux-$TS_ARCH.gz" \
-        | gunzip | sudo tee /usr/local/bin/tree-sitter > /dev/null
-    sudo chmod +x /usr/local/bin/tree-sitter
+        | gunzip | $SUDO tee /usr/local/bin/tree-sitter > /dev/null
+    $SUDO chmod +x /usr/local/bin/tree-sitter
 fi
 
 # 3. Neovim en la version exacta
@@ -45,10 +46,10 @@ else
     TMP="$(mktemp -d)"
     curl -fL -o "$TMP/nvim.tar.gz" \
         "https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim-linux-$ARCH.tar.gz"
-    sudo rm -rf "/opt/nvim-$NVIM_VERSION"
-    sudo mkdir -p "/opt/nvim-$NVIM_VERSION"
-    sudo tar -xzf "$TMP/nvim.tar.gz" -C "/opt/nvim-$NVIM_VERSION" --strip-components=1
-    sudo ln -sf "/opt/nvim-$NVIM_VERSION/bin/nvim" /usr/local/bin/nvim
+    $SUDO rm -rf "/opt/nvim-$NVIM_VERSION"
+    $SUDO mkdir -p "/opt/nvim-$NVIM_VERSION"
+    $SUDO tar -xzf "$TMP/nvim.tar.gz" -C "/opt/nvim-$NVIM_VERSION" --strip-components=1
+    $SUDO ln -sf "/opt/nvim-$NVIM_VERSION/bin/nvim" /usr/local/bin/nvim
     rm -rf "$TMP"
     hash -r
 fi
@@ -79,4 +80,12 @@ if [[ -f "$LOCK" ]]; then
     done < "$LOCK"
 fi
 
-echo "Listo. Al abrir nvim por primera vez, Mason instalara los LSP y treesitter los parsers."
+# 8. Servidores LSP de la lista 'servers' y parsers de treesitter
+# mason-lspconfig no instala en modo headless; MasonUpdate baja el registro y MasonInstall espera a terminar
+nvim --headless -c 'MasonUpdate' -c "lua local map = require('mason-lspconfig.mappings').get_mason_map().lspconfig_to_package
+    local pkgs = vim.tbl_map(function(s) return map[s] end, require('mason-lspconfig.settings').current.ensure_installed)
+    vim.cmd('MasonInstall ' .. table.concat(pkgs, ' '))
+    local ts_task = package.loaded.treesitter_config
+    if type(ts_task) == 'table' then ts_task:wait(600000) end" -c 'qa!'
+
+echo "Listo."

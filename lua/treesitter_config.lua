@@ -8,7 +8,8 @@ if not status_ok then
 end
 
 -- Parsers que deseas asegurar instalados (se instalan en segundo plano)
-ts.install({
+-- La tarea se devuelve al final del archivo para que install.sh pueda esperar a que termine
+local install_task = ts.install({
     "c",
     "lua",
     "vim",
@@ -41,3 +42,5 @@ vim.api.nvim_create_autocmd("FileType", {
         end
     end,
 })
+
+return install_task
